@@ -1,8 +1,8 @@
 cas:
   #Required properties
-  server-url-prefix: https://dk.example.org:8143/cas
-  server-login-url: https://dk.example.org:8143/cas/login
-  client-host-url: https://dk.example.org:8443
+  server-url-prefix: https://sso.baicaowei.cn:8443/cas
+  server-login-url: ${cas.server-url-prefix}/login
+  client-host-url: https://oauth.demo.bcw.com:${server.port}
 
   #Optional properties
   authentication-url-patterns: [/protected, /protected2]
@@ -30,14 +30,15 @@ spring:
 
 #Sample embedded servlet container SSL config and session tracking mode. Change as appropriate for your local deployment environment
 server:
-  port: 8443
-  session:
-    cookie:
-      http-only: true
-    tracking-modes: COOKIE
+  port: 8843
+  servlet:
+    session:
+      cookie:
+        http-only: true
+      tracking-modes: COOKIE
   ssl:
     enabled: true
-    key-store: /etc/cas/thekeystore
+    key-store: c://etc/cas/thekeystore
     key-store-password: changeit
   #For 'renew' param, latest Java CAS client requires that it is set as the Servlet 'context-param'. This is how to easily set it in Spring Boot
   #context-parameters.renew: true
